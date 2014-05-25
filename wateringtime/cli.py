@@ -1,40 +1,34 @@
 import argparse
+import datetime
 
-import prettytable
 import yaml
 
+from . import cal
+from . import simple
 
-def show_zones(data):
-    t = prettytable.PrettyTable(
-        field_names=('Zone', 'Name'),
-        print_empty=False,
-    )
-    t.padding_width = 1
-    t.align['Zone'] = 'r'
-    t.align['Name'] = 'l'
-
-    for z in sorted(data['zones'].items()):
-        t.add_row(z)
-
-    print t.get_string()
-
-
-def show_programs(data):
-    t = prettytable.PrettyTable(
-        field_names=('Program', 'Start Times', 'Days', 'Zones'),
-        print_empty=False,
-    )
-    t.padding_width = 1
-    t.align['Zones'] = 'l'
-
-    for p, pdata in sorted(data['programs'].items()):
-        t.add_row((p, '\n'.join(pdata['start']), pdata['days'],
-                   '\n'.join(pdata['zones'])))
-    print t.get_string()
 
 
 def main():
+    today = datetime.date.today()
     ap = argparse.ArgumentParser()
+    ap.add_argument(
+        '--format', '-f',
+        choices=('simple', 'calendar'),
+        default='simple',
+        help='output format (%(default)s)',
+    )
+    ap.add_argument(
+        '--year',
+        type=int,
+        default=today.year,
+        help='year to show schedule',
+    )
+    ap.add_argument(
+        '--month',
+        type=int,
+        default=today.month,
+        help='month of the year to show schedule',
+    )
     ap.add_argument(
         'filename',
         default='wateringtime.yaml',
@@ -45,8 +39,12 @@ def main():
 
     data = yaml.load(open(args.filename, 'r'))
 
-    show_zones(data)
-    show_programs(data)
+    formatters = {
+        'simple': simple.show,
+        'calendar': cal.show,
+    }
+
+    formatters[args.format](args, data)
     return
 
 
