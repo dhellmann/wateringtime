@@ -1,3 +1,5 @@
+import operator
+
 import prettytable
 
 
@@ -25,8 +27,11 @@ def show_programs(data):
     t.align['Zones'] = 'l'
 
     for p, pdata in sorted(data['programs'].items()):
+        zones = '\n'.join('%(zone)s(%(time)s)' % z
+                          for z in sorted(pdata['zones'],
+                                          key=operator.itemgetter('zone')))
         t.add_row((p, '\n'.join(pdata['start']), pdata['days'],
-                   '\n'.join(pdata['zones'])))
+                   zones))
     print t.get_string()
 
 
