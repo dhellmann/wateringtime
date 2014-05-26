@@ -20,11 +20,11 @@ def show(args, data):
     t.align = 'l'
 
     cal = calendar.Calendar(calendar.MONDAY)
-    month_data = cal.monthdayscalendar(args.year, args.month)
+    month_data = cal.monthdays2calendar(args.year, args.month)
 
     for week in month_data:
         row = []
-        for n, day in enumerate(week):
+        for day, n in week:
             if not day:
                 # Zero days are from another month; leave the cell blank.
                 row.append('')
