@@ -24,16 +24,16 @@ def show(args, data):
 
     for week in month_data:
         row = []
-        for day, n in week:
-            if not day:
+        for dom, dow in week:
+            if not dom:
                 # Zero days are from another month; leave the cell blank.
                 row.append('')
                 continue
 
             # Show the day and all watering events on that day.
-            lines = ['(%s)' % day]
+            lines = ['(%s)' % dom]
             for p in (p for p in programs
-                      if p.occurs_on_day(n, day)):
+                      if p.occurs_on_day(dow, dom)):
                 if args.verbose:
                     lines.append('')
                     lines.append('{name} ({days})'.format(name=p.name,
