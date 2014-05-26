@@ -38,11 +38,11 @@ class Program(object):
 
     @staticmethod
     def _check_odd(dow, dom):
-        return bool(dom % 1)
+        return bool(dom % 2)
 
     @staticmethod
     def _check_even(dow, dom):
-        return not bool(dom % 1)
+        return not bool(dom % 2)
 
     @staticmethod
     def _check_dow(dow, dom, valid):
