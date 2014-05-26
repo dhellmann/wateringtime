@@ -26,13 +26,16 @@ def show(args, data):
     month_data = cal.monthdayscalendar(args.year, args.month)
     for week in month_data:
         row = []
-        for n, day in enumerate(week, 1):
+        for n, day in enumerate(week):
             if not day:
                 row.append('')
                 continue
             lines = ['(%s)' % day]
             for p in (p for p in programs
                       if p.occurs_on_day(n, day)):
+                if args.verbose:
+                    lines.append('')
+                    lines.append('%s (%s)' % (p.name, p.days))
                 for s, e, z in p.get_run_times():
                     name = data['zones'][z]
                     lines.append(

@@ -18,6 +18,13 @@ def main():
         help='output format (%(default)s)',
     )
     ap.add_argument(
+        '-c',
+        dest='format',
+        action='store_const',
+        const='calendar',
+        help='output calendar format',
+    )
+    ap.add_argument(
         '--year',
         type=int,
         default=today.year,
@@ -28,6 +35,12 @@ def main():
         type=int,
         default=today.month,
         help='month of the year to show schedule',
+    )
+    ap.add_argument(
+        '-v', '--verbose',
+        action='store_true',
+        default=False,
+        help='enable verbose output',
     )
     ap.add_argument(
         'filename',
