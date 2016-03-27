@@ -1,0 +1,38 @@
+zones:
+  1: turf
+  2: f shrubs
+  3: b shrubs
+  4: patio
+  5: garden
+
+programs:
+  A:
+    start:
+      - '4:00'
+    days: MWF
+    zones:
+      - zone: 2
+        time: 15
+      - zone: 3
+        time: 15
+  B:
+    start:
+      - '3:00'
+    days: MSa
+    zones:
+      - zone: 1
+        time: 30
+  C:
+    start:
+      - '3:15'
+    days: even
+    zones:
+      - zone: 2
+        time: 15
+      - zone: 3
+        time: 15
+      - zone: 5
+        time: 5
+      - zone: 4
+        time: 10
+
