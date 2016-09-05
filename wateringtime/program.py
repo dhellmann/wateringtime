@@ -52,7 +52,9 @@ class Program(object):
         """
         for s in self.start_times:
             for z in self.zones:
-                # FIXME: Convert to datetime and use timedelta?
+                # NOTE: Using a timedelta would require converting to
+                # datetime, not just time, which would fix the times
+                # on particular days, which we don't want.
                 h, m = s.hour, s.minute
                 m += z['time']
                 h += m // 60
