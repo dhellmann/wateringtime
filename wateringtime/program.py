@@ -71,6 +71,6 @@ class Program(object):
         else:
             valid=[
                 self._day_abbr[m]
-                for m in re.findall('([MTWF]|Tu|Th|Sa|Su)', s)
+                for m in re.findall('([MWF]|Tu|Th|Sa|Su)', s)
             ]
             return lambda dow, dom, valid=valid: dow in valid
