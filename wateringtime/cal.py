@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import calendar
 import datetime
 import functools
@@ -5,13 +7,8 @@ import operator
 
 import prettytable
 
-from .program import Program
 
-
-def show(args, data):
-    programs = [Program(*p) for p in data['programs'].items()]
-    programs.sort(key=lambda p: p.start_times[0])
-
+def show(args, zones, programs):
     t = prettytable.PrettyTable(
         field_names=calendar.day_abbr,
         print_empty=False,
@@ -38,7 +35,7 @@ def show(args, data):
                     lines.append('')
                     lines.append('{p.name} ({p.days}) [{p.duration}]'.format(p=p))
                 for s, e, z in p.run_times:
-                    name = data['zones'][z]
+                    name = zones[z]
                     lines.append(
                         '{s}-{e} - {name}'.format(
                             s=s.strftime('%H:%M'),
@@ -51,8 +48,8 @@ def show(args, data):
 
     formatted = t.get_string()
     # Center the name of the month over the output calendar.
-    print '\n{:^{width}}\n'.format(
+    print('\n{:^{width}}\n'.format(
         calendar.month_name[args.month],
         width=len(formatted.splitlines()[0]),
-    )
-    print formatted
+    ))
+    print(formatted)

@@ -3,8 +3,9 @@ import datetime
 
 import yaml
 
-from . import cal
-from . import simple
+from wateringtime import cal
+from wateringtime import program
+from wateringtime import simple
 
 
 
@@ -57,7 +58,14 @@ def main():
         'calendar': cal.show,
     }
 
-    formatters[args.format](args, data)
+    zones = data['zones']
+    programs = [
+        program.Program(*p)
+        for p in data['programs'].items()
+    ]
+    programs.sort(key=lambda p: p.start_times[0])
+
+    formatters[args.format](args, zones, programs)
     return
 
 
