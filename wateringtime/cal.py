@@ -48,7 +48,7 @@ def show(args, zones, programs):
     formatted = t.get_string()
     # Center the name of the month over the output calendar.
     print('\n{:^{width}}\n'.format(
-        calendar.month_name[args.month],
+        '{} {}'.format(calendar.month_name[args.month], args.year),
         width=len(formatted.splitlines()[0]),
     ))
     print(formatted)
