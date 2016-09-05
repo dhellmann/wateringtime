@@ -39,6 +39,15 @@ class Program(object):
         return self._day_checker(dow, dom)
 
     @property
+    def duration(self):
+        """How long does the program run in total?
+        """
+        return sum(
+            z['time']
+            for z in self.data['zones']
+        )
+
+    @property
     def run_times(self):
         """Returns iterable of start, end, and zone name tuples.
         """

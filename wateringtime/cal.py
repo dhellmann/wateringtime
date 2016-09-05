@@ -36,8 +36,7 @@ def show(args, data):
                       if p.occurs_on_day(dow, dom)):
                 if args.verbose:
                     lines.append('')
-                    lines.append('{name} ({days})'.format(name=p.name,
-                                                          days=p.days))
+                    lines.append('{p.name} ({p.days}) [{p.duration}]'.format(p=p))
                 for s, e, z in p.run_times:
                     name = data['zones'][z]
                     lines.append(
