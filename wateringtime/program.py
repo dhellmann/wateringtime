@@ -55,7 +55,7 @@ class Program(object):
                 # FIXME: Convert to datetime and use timedelta?
                 h, m = s.hour, s.minute
                 m += z['time']
-                h += m / 60
+                h += m // 60
                 m = m % 60
                 e = datetime.time(h, m)
                 yield s, e, z['zone']
