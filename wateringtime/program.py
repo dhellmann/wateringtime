@@ -1,6 +1,5 @@
 import calendar
 import datetime
-import functools
 import operator
 import re
 
@@ -78,7 +77,7 @@ class Program(object):
         elif s == 'even':
             return lambda dow, dom: not bool(dom % 2)
         else:
-            valid=[
+            valid = [
                 self._day_abbr[m]
                 for m in re.findall('([MWF]|Tu|Th|Sa|Su)', s)
             ]

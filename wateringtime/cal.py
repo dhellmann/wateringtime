@@ -1,9 +1,6 @@
 from __future__ import print_function
 
 import calendar
-import datetime
-import functools
-import operator
 
 import prettytable
 
@@ -19,6 +16,8 @@ def show(args, zones, programs):
     cal = calendar.Calendar(calendar.MONDAY)
     month_data = cal.monthdays2calendar(args.year, args.month)
 
+    line_template = '{p.name} ({p.days}) [{p.duration}]'
+
     for week in month_data:
         row = []
         for dom, dow in week:
@@ -33,7 +32,7 @@ def show(args, zones, programs):
                       if p.occurs_on_day(dow, dom)):
                 if args.verbose:
                     lines.append('')
-                    lines.append('{p.name} ({p.days}) [{p.duration}]'.format(p=p))
+                    lines.append(line_template.format(p=p))
                 for s, e, z in p.run_times:
                     name = zones[z]
                     lines.append(

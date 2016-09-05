@@ -1,12 +1,12 @@
 import argparse
 import datetime
+import sys
 
 import yaml
 
 from wateringtime import cal
 from wateringtime import program
 from wateringtime import simple
-
 
 
 def main():

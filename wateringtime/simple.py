@@ -1,10 +1,6 @@
 from __future__ import print_function
 
-import operator
-
 import prettytable
-
-from .program import Program
 
 
 def show_programs(zones, programs):
