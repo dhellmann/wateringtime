@@ -23,7 +23,7 @@ def show_programs(zones, programs):
             p.name,
             p.days,
             '\n'.join(
-                str(s)
+                s.strftime('%H:%M')
                 for s, e, z in p.run_times
             ),
             zone_names,
